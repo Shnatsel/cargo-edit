@@ -25,6 +25,8 @@ use structopt::StructOpt;
 use termcolor::{Color, ColorChoice, ColorSpec, StandardStream, WriteColor};
 use toml_edit::Item as TomlItem;
 
+static COMPRESSED_DEPENDENCY_LIST: &[u8] = auditable::inject_dependency_list!();
+
 mod args;
 
 mod errors {
@@ -93,6 +95,7 @@ fn print_msg(dep: &Dependency, section: &[String], optional: bool) -> Result<()>
     } else {
         writeln!(output)?
     }
+    println!("{}", COMPRESSED_DEPENDENCY_LIST[0]);
     Ok(())
 }
 
